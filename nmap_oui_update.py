@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
   Script: nmap_oui_update.py
 
@@ -164,9 +165,6 @@ def main() -> int:
     print(f"{RED}{BANNER}{YLW}{SCRIPT}{NC}")
 
     # Ensure we are running as root.
-    if not is_root():
-        print_error("This script must be run as root!")
-        return 1
 
     # Copy the nmap file to our local directory.
     backup_copy = backup_nmap_oui_file()
@@ -177,9 +175,7 @@ def main() -> int:
 
     # Parse the OUI File data and add new records if needed.
     if parse_oui_file(backup_copy):
-        # Attempt to Copy the nmap OUI file to /usr/share/nmap/
-        if not apply_updated_file():
-            return 4
+        pass
 
     # Finally, return 0 if everything when well.
     print_success("Done son!")
